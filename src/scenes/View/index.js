@@ -15,7 +15,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 30px;
+  padding: 5vh 5vw;
   box-sizing: border-box;
 `
 
@@ -24,16 +24,26 @@ const ContentRow = styled.div`
   display: flex;
   align-items: flex-start;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1100px;
+
+  @media screen and (max-width: 850px) {
+    flex-direction: column;
+    height: 80vh;
+    align-items: center;
+  }
 `
 
 const NavigationRow = styled.div`
   width: 100%;
   display: flex;
   align-items: flex-start;
-  margin: 10vh auto 0;
+  margin: 5vh auto 0;
   box-sizing: border-box;
   max-width: 900px;
+
+  @media screen and (max-width: 850px) {
+    margin: 2vh auto 0;
+  }
 `
 
 const pieces = [1, 2, 3, 4, 5, 6, 7, 8]

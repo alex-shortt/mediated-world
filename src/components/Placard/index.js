@@ -9,13 +9,34 @@ const Container = styled.div`
   height: 100%;
   box-sizing: border-box;
   padding: 0 25px;
+
+  @media screen and (max-width: 850px) {
+    padding: 0 4vw;
+    position: absolute;
+    background: white;
+    width: 60vw;
+    border: 1px solid black;
+    bottom: 17vh;
+    left: 33vw;
+    overflow-y: auto;
+    max-height: 60vh;
+    height: auto;
+  }
 `
 
 const Title = styled.h1`
   font-family: Impact, sans-serif;
+
+  @media screen and (max-width: 850px) {
+    font-size: 1.3em;
+  }
 `
 const Description = styled.p`
   font-family: "Times New Roman", serif;
+
+  @media screen and (max-width: 850px) {
+    font-size: 0.9em;
+  }
 `
 
 export default function Placard(props) {

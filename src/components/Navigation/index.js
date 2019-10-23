@@ -25,12 +25,23 @@ const Triangle = styled.svg.attrs({
   &:hover {
     fill: black;
   }
+
+  @media screen and (max-width: 850px) {
+    width: 30px;
+    height: 30px;
+  }
 `
 
 const Position = styled.h1`
   font-family: Impact, sans-serif;
-  margin: 0 30px;
+  margin: 0 20px;
   width: 100px;
+  text-align: center;
+
+  @media screen and (max-width: 850px) {
+    width: 30vw;
+    font-size: 1.8em;
+  }
 `
 
 export default function Navigation(props) {
