@@ -2,7 +2,8 @@ import React, { useRef } from "react"
 import styled from "styled-components"
 
 import Helmet from "components/Helmet"
-import Portal from "components/Portal"
+import Canvas from "components/Canvas"
+import Placard from "components/Placard"
 
 const Container = styled.div`
   width: 100%;
@@ -19,7 +20,6 @@ const Container = styled.div`
 
 const ContentRow = styled.div`
   height: 60vh;
-  background: rgba(245, 0, 0, 0.4);
   display: flex;
   align-items: center;
 `
@@ -31,7 +31,8 @@ export default function View(props) {
     <Container>
       <Helmet title="View" />
       <ContentRow ref={contentRowRef}>
-        <Portal parentRef={contentRowRef} />
+        <Canvas parentRef={contentRowRef} />
+        <Placard />
       </ContentRow>
     </Container>
   )

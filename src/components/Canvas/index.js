@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const percentageOfParent = 0.6
 
-export default function Portal(props) {
+export default function Canvas(props) {
   const { parentRef } = props
 
   const ratio = useAspectRatio()
