@@ -15,7 +15,7 @@ const Container = styled.div`
     position: absolute;
     background: white;
     width: 60vw;
-    border: 1px solid black;
+    border: 4px solid black;
     bottom: 17vh;
     left: 33vw;
     overflow-y: auto;
@@ -40,9 +40,9 @@ const Description = styled.p`
 `
 
 export default function Placard(props) {
-  const { title = "Ronda", description = loremIpsum } = props
+  const { title = "Ronda", description = loremIpsum, ...restProps } = props
   return (
-    <Container>
+    <Container {...restProps}>
       <Title>{title}</Title>
       <Description>{description}</Description>
     </Container>

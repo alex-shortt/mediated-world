@@ -52,6 +52,7 @@ export default function View(props) {
   const contentRowRef = useRef()
 
   const [piece, setPiece] = useState(0)
+  const [focusTop, setFocusTop] = useState("true")
 
   const changePiece = useCallback(
     diff => {
@@ -73,8 +74,14 @@ export default function View(props) {
     <Container>
       <Helmet title="View" />
       <ContentRow ref={contentRowRef}>
-        <Canvas parentRef={contentRowRef} />
-        <Placard />
+        <Canvas
+          parentRef={contentRowRef}
+          onClick={() => setFocusTop("false")}
+        />
+        <Placard
+          onClick={() => setFocusTop("true")}
+          style={{ zIndex: focusTop === "true" ? 2 : 0 }}
+        />
       </ContentRow>
       <NavigationRow>
         <Navigation pos={piece} changePos={changePiece} range={pieces.length} />

@@ -7,6 +7,7 @@ const Container = styled.div`
   border: 4px solid black;
   background: white;
   box-sizing: border-box;
+  z-index: 1;
 
   @media screen and (max-width: 850px) {
     position: absolute;
@@ -18,7 +19,7 @@ const Container = styled.div`
 const percentageOfParent = 0.6
 
 export default function Canvas(props) {
-  const { parentRef } = props
+  const { parentRef, ...restProps } = props
 
   const ratio = useAspectRatio()
   const parentDimensions = useRefDimensions(parentRef)
@@ -37,5 +38,7 @@ export default function Canvas(props) {
     height = width / ratio
   }
 
-  return <Container style={{ width: `${width}px`, height: `${height}px` }} />
+  const style = { width: `${width}px`, height: `${height}px` }
+
+  return <Container style={style} {...restProps} />
 }
