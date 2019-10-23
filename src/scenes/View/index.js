@@ -1,9 +1,10 @@
-import React, { useRef } from "react"
+import React, { useRef, useState, useCallback } from "react"
 import styled from "styled-components"
 
 import Helmet from "components/Helmet"
 import Canvas from "components/Canvas"
 import Placard from "components/Placard"
+import Navigation from "components/Navigation"
 
 const Container = styled.div`
   width: 100%;
@@ -19,13 +20,44 @@ const Container = styled.div`
 `
 
 const ContentRow = styled.div`
-  height: 60vh;
+  height: 50vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: 1200px;
 `
+
+const NavigationRow = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  margin: 10vh auto 0;
+  box-sizing: border-box;
+  max-width: 900px;
+`
+
+const pieces = [1, 2, 3, 4, 5, 6, 7, 8]
 
 export default function View(props) {
   const contentRowRef = useRef()
+
+  const [piece, setPiece] = useState(0)
+
+  const changePiece = useCallback(
+    diff => {
+      let newPiece = piece + diff
+
+      if (newPiece > pieces.length - 1) {
+        newPiece = 0
+      }
+      if (newPiece < 0) {
+        newPiece = pieces.length - 1
+      }
+
+      setPiece(newPiece)
+    },
+    [piece]
+  )
 
   return (
     <Container>
@@ -34,6 +66,9 @@ export default function View(props) {
         <Canvas parentRef={contentRowRef} />
         <Placard />
       </ContentRow>
+      <NavigationRow>
+        <Navigation pos={piece} changePos={changePiece} range={pieces.length} />
+      </NavigationRow>
     </Container>
   )
 }
