@@ -20,6 +20,8 @@ const Container = styled.div`
 const ContentRow = styled.div`
   height: 60vh;
   background: rgba(245, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
 `
 
 export default function View(props) {
