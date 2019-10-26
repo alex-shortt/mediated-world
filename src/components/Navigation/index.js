@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React from "react"
 import styled from "styled-components/macro"
 
 const Container = styled.div`
@@ -18,7 +18,7 @@ const Triangle = styled.svg.attrs({
   stroke-width: 4px;
   stroke: black;
   fill: white;
-
+  user-select: none;
   transition: fill 0.15s linear;
   cursor: pointer;
 

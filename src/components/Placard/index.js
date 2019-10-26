@@ -40,7 +40,10 @@ const Description = styled.p`
 `
 
 export default function Placard(props) {
-  const { title = "Ronda", description = loremIpsum, ...restProps } = props
+  const { piece, ...restProps } = props
+
+  const { title = "Untitled", description = "" } = piece
+
   return (
     <Container {...restProps}>
       <Title>{title}</Title>

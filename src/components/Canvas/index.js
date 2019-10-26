@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components/macro"
 
+import P5Wrapper from "components/P5Wrapper"
 import { useAspectRatio, useRefDimensions } from "services/dimensions"
 
 const Container = styled.div`
@@ -19,7 +20,7 @@ const Container = styled.div`
 const percentageOfParent = 0.6
 
 export default function Canvas(props) {
-  const { parentRef, ...restProps } = props
+  const { piece, parentRef, ...restProps } = props
 
   const ratio = useAspectRatio()
   const parentDimensions = useRefDimensions(parentRef)
@@ -39,6 +40,14 @@ export default function Canvas(props) {
   }
 
   const style = { width: `${width}px`, height: `${height}px` }
+
+  if (piece.type === "p5") {
+    return (
+      <Container style={style} {...restProps}>
+        <P5Wrapper sketch={piece.sketch} />
+      </Container>
+    )
+  }
 
   return <Container style={style} {...restProps} />
 }

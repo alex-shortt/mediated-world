@@ -1,6 +1,7 @@
 import React, { useRef, useState, useCallback } from "react"
 import styled from "styled-components"
 
+import pieces from "services/pieces"
 import Helmet from "components/Helmet"
 import Canvas from "components/Canvas"
 import Placard from "components/Placard"
@@ -25,6 +26,7 @@ const ContentRow = styled.div`
   align-items: flex-start;
   margin: 0 auto;
   max-width: 1100px;
+  width: 100%;
 
   @media screen and (max-width: 850px) {
     flex-direction: column;
@@ -46,17 +48,15 @@ const NavigationRow = styled.div`
   }
 `
 
-const pieces = [1, 2, 3, 4, 5, 6, 7, 8]
-
 export default function View(props) {
   const contentRowRef = useRef()
 
-  const [piece, setPiece] = useState(0)
+  const [index, setIndex] = useState(0)
   const [focusTop, setFocusTop] = useState("true")
 
-  const changePiece = useCallback(
+  const changeIndex = useCallback(
     diff => {
-      let newPiece = piece + diff
+      let newPiece = index + diff
 
       if (newPiece > pieces.length - 1) {
         newPiece = 0
@@ -65,9 +65,9 @@ export default function View(props) {
         newPiece = pieces.length - 1
       }
 
-      setPiece(newPiece)
+      setIndex(newPiece)
     },
-    [piece]
+    [index]
   )
 
   return (
@@ -77,14 +77,16 @@ export default function View(props) {
         <Canvas
           parentRef={contentRowRef}
           onClick={() => setFocusTop("false")}
+          piece={pieces[index]}
         />
         <Placard
           onClick={() => setFocusTop("true")}
           style={{ zIndex: focusTop === "true" ? 2 : 0 }}
+          piece={pieces[index]}
         />
       </ContentRow>
       <NavigationRow>
-        <Navigation pos={piece} changePos={changePiece} range={pieces.length} />
+        <Navigation pos={index} changePos={changeIndex} range={pieces.length} />
       </NavigationRow>
     </Container>
   )
