@@ -45,6 +45,9 @@ function sketch(p) {
 }
 
 const title = "Children"
-const description = "This my piece children"
+const description = `Size of the cubes relate to amount of information stored, 
+  so each of the cubes know more than the last. Position relates to how "in-sync" 
+  cubes are relative to each other, so since they're positioned very evenly 
+  and rotate based off of each other, you can tell they are closely related.`
 
 export default { type: "p5", title, description, sketch }
