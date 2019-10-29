@@ -10,6 +10,13 @@ const Container = styled.div`
   box-sizing: border-box;
   z-index: 1;
 
+  //  position: absolute;
+  //top: 0;
+  //left: 0;
+  //width: 100% !important;
+  //height: 100% !important;
+  //z-index: 5;
+
   @media screen and (max-width: 850px) {
     position: absolute;
     top: 4vh;

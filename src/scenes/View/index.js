@@ -51,7 +51,7 @@ const NavigationRow = styled.div`
 export default function View(props) {
   const contentRowRef = useRef()
 
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(2)
   const [focusTop, setFocusTop] = useState("true")
 
   const changeIndex = useCallback(
