@@ -31,7 +31,18 @@ const Title = styled.h1`
     font-size: 1.3em;
   }
 `
-const Description = styled.p`
+
+const Subtitle = styled.p`
+  font-family: Impact, sans-serif;
+  color: #898989;
+  font-size: 0.9em;
+
+  @media screen and (max-width: 850px) {
+    font-size: 1.1em;
+  }
+`
+
+const Text = styled.p`
   font-family: "Times New Roman", serif;
 
   @media screen and (max-width: 850px) {
@@ -42,12 +53,13 @@ const Description = styled.p`
 export default function Placard(props) {
   const { piece, ...restProps } = props
 
-  const { title = "Untitled", description = "" } = piece
+  const { title = "Untitled", description = "", date } = piece
 
   return (
     <Container {...restProps}>
       <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Subtitle>{date}</Subtitle>
+      <Text>{description}</Text>
     </Container>
   )
 }

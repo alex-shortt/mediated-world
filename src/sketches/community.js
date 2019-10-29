@@ -93,6 +93,7 @@ function sketch(p) {
 }
 
 const title = "Community"
+const date = "10-29-19"
 const description = `Premature attempt at community. A few good notes, though:
 absolute position of multiple beings means nothing - only relativity matters. 
 Groups of cubes show communities, and within communities similar information is
@@ -101,4 +102,4 @@ inherently smarter, and those cubes that are surrounded by others receive
 messages more clearly (reinforced).
 `
 
-export default { type: "p5", title, description, sketch }
+export default { type: "p5", title, description, date, sketch }
