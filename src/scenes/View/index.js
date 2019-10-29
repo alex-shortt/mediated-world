@@ -72,7 +72,7 @@ export default function View(props) {
 
   return (
     <Container>
-      <Helmet title="View" />
+      <Helmet title="Mediated World" />
       <ContentRow ref={contentRowRef}>
         <Canvas
           parentRef={contentRowRef}
