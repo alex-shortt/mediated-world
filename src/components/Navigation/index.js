@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import styled from "styled-components/macro"
 
 const Container = styled.div`
@@ -45,7 +45,23 @@ const Position = styled.h1`
 `
 
 export default function Navigation(props) {
-  const { pos, range, changePos } = props
+  const { pos, setPos, range } = props
+
+  const changePos = useCallback(
+    diff => {
+      let newPos = pos + diff
+
+      if (newPos > range - 1) {
+        newPos = 0
+      }
+      if (newPos < 0) {
+        newPos = range - 1
+      }
+
+      setPos(newPos)
+    },
+    [pos, range, setPos]
+  )
 
   return (
     <Container>

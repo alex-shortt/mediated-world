@@ -1,7 +1,7 @@
-import React, { useRef, useState, useCallback } from "react"
+import React, { useRef, useState } from "react"
 import styled from "styled-components"
 
-import pieces from "services/pieces"
+import { getPieceByIndex, NUM_PIECES } from "services/pieces"
 import Helmet from "components/Helmet"
 import Canvas from "components/Canvas"
 import Placard from "components/Placard"
@@ -54,22 +54,6 @@ export default function View(props) {
   const [index, setIndex] = useState(0)
   const [focusTop, setFocusTop] = useState("true")
 
-  const changeIndex = useCallback(
-    diff => {
-      let newPiece = index + diff
-
-      if (newPiece > pieces.length - 1) {
-        newPiece = 0
-      }
-      if (newPiece < 0) {
-        newPiece = pieces.length - 1
-      }
-
-      setIndex(newPiece)
-    },
-    [index]
-  )
-
   return (
     <Container>
       <Helmet title="Mediated World" />
@@ -77,16 +61,16 @@ export default function View(props) {
         <Canvas
           parentRef={contentRowRef}
           onClick={() => setFocusTop("false")}
-          piece={pieces[index]}
+          piece={getPieceByIndex(index)}
         />
         <Placard
           onClick={() => setFocusTop("true")}
           style={{ zIndex: focusTop === "true" ? 2 : 0 }}
-          piece={pieces[index]}
+          piece={getPieceByIndex(index)}
         />
       </ContentRow>
       <NavigationRow>
-        <Navigation pos={index} changePos={changeIndex} range={pieces.length} />
+        <Navigation pos={index} setPos={setIndex} range={NUM_PIECES} />
       </NavigationRow>
     </Container>
   )
