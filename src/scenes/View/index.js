@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
 
-import { getPieceByIndex, NUM_PIECES } from "services/pieces"
+import { getPieceByIndex, getPieceIndexByTitle } from "services/pieces"
 import { calcChildrenZIndex } from "services/zIndex"
 import Helmet from "components/Helmet"
 import Canvas from "components/Canvas"
@@ -50,9 +50,16 @@ const NavigationRow = styled.div`
 `
 
 export default function View(props) {
-  const contentRowRef = useRef()
+  const {
+    match: {
+      params: { pieceId }
+    }
+  } = props
 
-  const [index, setIndex] = useState(0)
+  // TODO: if not first or second option, redirect or 404!
+  const index = parseInt(pieceId, 10) - 1 || getPieceIndexByTitle(pieceId) || 0
+
+  const contentRowRef = useRef()
 
   return (
     <Container>
@@ -65,7 +72,7 @@ export default function View(props) {
         <Placard piece={getPieceByIndex(index)} />
       </ContentRow>
       <NavigationRow>
-        <Navigation pos={index} setPos={setIndex} range={NUM_PIECES} />
+        <Navigation pos={index} />
       </NavigationRow>
     </Container>
   )

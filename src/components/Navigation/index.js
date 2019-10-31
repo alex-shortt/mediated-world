@@ -1,5 +1,8 @@
-import React, { useCallback } from "react"
+import React from "react"
 import styled from "styled-components/macro"
+import { Link } from "react-router-dom"
+
+import { NUM_PIECES, getPieceNeighborTitles } from "services/pieces"
 
 const Container = styled.div`
   width: 100%;
@@ -45,35 +48,25 @@ const Position = styled.h1`
 `
 
 export default function Navigation(props) {
-  const { pos, setPos, range } = props
+  const { pos } = props
 
-  const changePos = useCallback(
-    diff => {
-      let newPos = pos + diff
-
-      if (newPos > range - 1) {
-        newPos = 0
-      }
-      if (newPos < 0) {
-        newPos = range - 1
-      }
-
-      setPos(newPos)
-    },
-    [pos, range, setPos]
-  )
+  const { prev, next } = getPieceNeighborTitles(pos)
 
   return (
     <Container>
-      <Triangle onClick={() => changePos(-1)}>
-        <polygon points="4,50 96,4 96,96" />
-      </Triangle>
+      <Link to={`/${prev}`}>
+        <Triangle>
+          <polygon points="4,50 96,4 96,96" />
+        </Triangle>
+      </Link>
       <Position>
-        {pos + 1} of {range}
+        {pos + 1} of {NUM_PIECES}
       </Position>
-      <Triangle onClick={() => changePos(1)}>
-        <polygon points="96,50 4,4 4,96" />
-      </Triangle>
+      <Link to={`/${next}`}>
+        <Triangle>
+          <polygon points="96,50 4,4 4,96" />
+        </Triangle>
+      </Link>
     </Container>
   )
 }
