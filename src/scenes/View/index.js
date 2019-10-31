@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import styled from "styled-components"
 
 import { getPieceByIndex, NUM_PIECES } from "services/pieces"
+import { calcChildrenZIndex } from "services/zIndex"
 import Helmet from "components/Helmet"
 import Canvas from "components/Canvas"
 import Placard from "components/Placard"
@@ -52,22 +53,16 @@ export default function View(props) {
   const contentRowRef = useRef()
 
   const [index, setIndex] = useState(0)
-  const [focusTop, setFocusTop] = useState("true")
 
   return (
     <Container>
       <Helmet title="Mediated World" />
-      <ContentRow ref={contentRowRef}>
-        <Canvas
-          parentRef={contentRowRef}
-          onClick={() => setFocusTop("false")}
-          piece={getPieceByIndex(index)}
-        />
-        <Placard
-          onClick={() => setFocusTop("true")}
-          style={{ zIndex: focusTop === "true" ? 2 : 0 }}
-          piece={getPieceByIndex(index)}
-        />
+      <ContentRow
+        ref={contentRowRef}
+        onClick={e => calcChildrenZIndex(contentRowRef, e.target)}
+      >
+        <Canvas parentRef={contentRowRef} piece={getPieceByIndex(index)} />
+        <Placard piece={getPieceByIndex(index)} />
       </ContentRow>
       <NavigationRow>
         <Navigation pos={index} setPos={setIndex} range={NUM_PIECES} />
