@@ -9,10 +9,10 @@
 export default class Color {
   constructor(props) {
     const defaultProps = {
-      hue: Math.floor(Math.random() * 255),
-      saturation: Math.floor(Math.random() * 100),
-      lightness: Math.floor(Math.random() * 100),
-      alpha: Math.floor(Math.random() * 100)
+      hue: Math.random() * 255,
+      saturation: Math.random(),
+      lightness: Math.random(),
+      alpha: Math.random()
     }
     this.props = { ...defaultProps, ...props }
     this.wrapValues()
@@ -54,9 +54,9 @@ export default class Color {
   getColor() {
     const { hue, saturation, lightness, alpha } = this.props
     const h = parseInt(hue, 10)
-    const s = parseInt(saturation, 10)
-    const l = parseInt(lightness, 10)
-    const a = parseInt(alpha, 10)
+    const s = Math.floor(saturation * 100)
+    const l = Math.floor(lightness * 100)
+    const a = alpha.toFixed(2)
 
     return `hsla(${h}, ${s}%, ${l}%, ${a})`
   }

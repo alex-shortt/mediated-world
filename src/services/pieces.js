@@ -1,5 +1,5 @@
 import Children from "sketches/children"
 import Community from "sketches/community"
-import Being from "sketches/being"
+import Ergodic from "sketches/ergodic"
 
-export default [Children, Community, Being]
+export default [Children, Community, Ergodic]
