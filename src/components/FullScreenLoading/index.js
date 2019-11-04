@@ -1,19 +1,7 @@
 import React from "react"
-import styled, { keyframes } from "styled-components/macro"
+import styled from "styled-components/macro"
 
-const scrollGradient = keyframes`
-  0% {
-    background-position: 0 50%
-  }
-
-  50% {
-    background-position: 100% 50%
-  }
-
-  100% {
-    background-position: 0 50%
-  }
- `
+import { useMousePos } from "services/sensors"
 
 const FullScreenWrapper = styled.div`
   position: absolute;
@@ -23,14 +11,14 @@ const FullScreenWrapper = styled.div`
   left: 0;
   z-index: 10;
 
-  background: linear-gradient(135deg, rgba(13, 23, 187, 0.93), #a90a77);
-  background-size: 400% 400%;
-
-  animation: ${scrollGradient} 40s ease infinite;
-
-  color: #fff;
+  background: white;
+  border: 8px solid black;
 `
 
 export default function FullScreenLoading() {
-  return <FullScreenWrapper />
+  // TODO: react to network changes?
+
+  const { handleMouseMove } = useMousePos()
+
+  return <FullScreenWrapper onMouseMove={handleMouseMove} />
 }
