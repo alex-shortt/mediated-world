@@ -60,14 +60,12 @@ export default function View(props) {
   const index = parseInt(pieceId, 10) - 1 || getPieceIndexByTitle(pieceId) || 0
 
   const contentRowRef = useRef()
+  const onClick = e => calcChildrenZIndex(contentRowRef, e.target)
 
   return (
     <Container>
       <Helmet title="Mediated World" />
-      <ContentRow
-        ref={contentRowRef}
-        onClick={e => calcChildrenZIndex(contentRowRef, e.target)}
-      >
+      <ContentRow ref={contentRowRef} onClick={onClick}>
         <Canvas parentRef={contentRowRef} piece={getPieceByIndex(index)} />
         <Placard piece={getPieceByIndex(index)} />
       </ContentRow>

@@ -16,6 +16,7 @@ const Info = styled.div`
 
 const Actions = styled.div`
   height: 100%;
+  user-select: none;
   margin-left: 10px;
   display: flex;
   flex-direction: column;
