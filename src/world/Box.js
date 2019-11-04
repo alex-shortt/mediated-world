@@ -11,7 +11,7 @@ import Stroke from "world/Stroke"
 export default class Box {
   constructor(props) {
     const defaultProps = {
-      size: 64,
+      size: 128,
       fill: new Color(),
       stroke: new Stroke(),
       pos: [0, 0, 0],

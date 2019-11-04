@@ -18,7 +18,7 @@ export default class Color {
     this.wrapValues()
   }
 
-  setColor(newColor, props) {
+  setColor(newColor, props = {}) {
     const { wrap, normalize } = props
     this.props = { ...props, ...newColor }
     if (wrap) {
@@ -51,14 +51,14 @@ export default class Color {
     this.setColor(newColor)
   }
 
-  toString() {
+  getColor() {
     const { hue, saturation, lightness, alpha } = this.props
     const h = parseInt(hue, 10)
     const s = parseInt(saturation, 10)
     const l = parseInt(lightness, 10)
     const a = parseInt(alpha, 10)
 
-    return `hsla(${h}, ${s}%, ${l}%, ${a}%)`
+    return `hsla(${h}, ${s}%, ${l}%, ${a})`
   }
 }
 
