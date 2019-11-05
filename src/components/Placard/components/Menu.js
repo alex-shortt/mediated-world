@@ -67,9 +67,7 @@ export default function Menu(props) {
         <Title>{title}</Title>
         <Subtitle>{date}</Subtitle>
       </Info>
-      <Actions>
-        <RefreshIcon />
-      </Actions>
+      <Actions />
     </Container>
   )
 }
