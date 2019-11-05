@@ -1,9 +1,11 @@
 import children from "sketches/children"
 import community from "sketches/community"
+import plugged from "sketches/plugged"
 
 const pieces = {
   children,
-  community
+  community,
+  plugged
 }
 
 export function getPieceByIndex(i) {
