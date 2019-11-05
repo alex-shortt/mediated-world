@@ -9,6 +9,7 @@ const Container = styled.div`
   background: white;
   box-sizing: border-box;
   z-index: 1;
+  user-select: none;
 
   //  position: absolute;
   //top: 0;
