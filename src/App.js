@@ -24,7 +24,7 @@ export default function App() {
           <GoogleAnalytics />
           <ScrollToTop>
             <Switch>
-              <Route path="/" component={View} />
+              <Route path={["/:pieceId", "/"]} component={View} />
               {/* TODO: 404 Page */}
             </Switch>
           </ScrollToTop>
