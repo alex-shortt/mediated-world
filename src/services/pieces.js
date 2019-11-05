@@ -1,11 +1,13 @@
 import children from "sketches/children"
 import community from "sketches/community"
 import plugged from "sketches/plugged"
+import ergodic from "sketches/ergodic"
 
 const pieces = {
   children,
   community,
-  plugged
+  plugged,
+  ergodic
 }
 
 export function getPieceByIndex(i) {
