@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 import { getPieceByIndex, getPieceIndexByTitle } from "services/pieces"
 import { calcChildrenZIndex } from "services/zIndex"
@@ -7,6 +7,15 @@ import Helmet from "components/Helmet"
 import Canvas from "components/Canvas"
 import Placard from "components/Placard"
 import Navigation from "components/Navigation"
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
 
 const Container = styled.div`
   width: 100%;
@@ -19,6 +28,10 @@ const Container = styled.div`
   justify-content: center;
   padding: 5vh 5vw;
   box-sizing: border-box;
+  opacity: 0;
+
+  animation: ease-in ${fadeIn} forwards 2s;
+  animation-delay: 0.5s;
 `
 
 const ContentRow = styled.div`

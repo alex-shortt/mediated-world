@@ -12,53 +12,52 @@ const FullScreenWrapper = styled.div`
   z-index: 10;
 
   background: white;
-  border: 8px solid black;
 `
 
 const shiftFactor = 10
-let deltaTotal = 0
-let background = "hsla(255, 255, 255, 100)"
+const deltaTotal = 0
+const background = "hsla(255, 255, 255, 100)"
 
 export default function FullScreenLoading() {
   // TODO: react to network changes?
 
-  const { handleMouseMove, mouseDeltaTotal, mouseX, mouseY } = useMousePos()
-  const [counter, setCounter] = useState(0)
+  // const { handleMouseMove, mouseDeltaTotal, mouseX, mouseY } = useMousePos()
+  // const [counter, setCounter] = useState(0)
+  //
+  // const update = useCallback(
+  //   deltaTotalState => {
+  //     let moveDelta = 0
+  //     if (mouseDeltaTotal > deltaTotalState) {
+  //       moveDelta = Math.abs(mouseDeltaTotal - deltaTotalState) / shiftFactor
+  //     }
+  //
+  //     const mouseAngle = Math.abs(Math.atan2(mouseY, mouseX)) / (Math.PI / 2)
+  //
+  //     const h = Math.floor(mouseAngle * 255)
+  //     const s = Math.floor(moveDelta * 100)
+  //     const l = 100 - Math.floor(moveDelta * 100)
+  //
+  //     background = `hsla(${h}, ${s}%, ${l}%, 1)`
+  //     console.log(mouseDeltaTotal - deltaTotalState)
+  //     if (moveDelta < 0.0005) {
+  //       deltaTotal = mouseDeltaTotal
+  //     } else {
+  //       deltaTotal += 0.01
+  //     }
+  //   },
+  //   [mouseDeltaTotal, mouseX, mouseY]
+  // )
+  //
+  // useEffect(() => {
+  //   update(deltaTotal)
+  //   requestAnimationFrame(() => setCounter(counter + 1))
+  // }, [counter, update])
 
-  const update = useCallback(
-    deltaTotalState => {
-      let moveDelta = 0
-      if (mouseDeltaTotal > deltaTotalState) {
-        moveDelta = Math.abs(mouseDeltaTotal - deltaTotalState) / shiftFactor
-      }
+  // return (
+  //   <FullScreenWrapper style={{ background }} onMouseMove={handleMouseMove} />
+  // )
 
-      const mouseAngle = Math.abs(Math.atan2(mouseY, mouseX)) / (Math.PI / 2)
-
-      const h = Math.floor(mouseAngle * 255)
-      const s = Math.floor(moveDelta * 100)
-      const l = 100 - Math.floor(moveDelta * 100)
-
-      background = `hsla(${h}, ${s}%, ${l}%, 1)`
-      console.log(mouseDeltaTotal - deltaTotalState)
-      if (moveDelta < 0.0005) {
-        deltaTotal = mouseDeltaTotal
-      } else {
-        deltaTotal += 0.01
-      }
-    },
-    [mouseDeltaTotal, mouseX, mouseY]
-  )
-
-  useEffect(() => {
-    update(deltaTotal)
-    requestAnimationFrame(() => setCounter(counter + 1))
-  }, [counter, update])
-
-  console.log(background)
-
-  return (
-    <FullScreenWrapper style={{ background }} onMouseMove={handleMouseMove} />
-  )
+  return <FullScreenWrapper />
 }
 
 /*
