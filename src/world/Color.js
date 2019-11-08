@@ -1,7 +1,7 @@
 // Color :: Information
 //    hue (0-255)   <---> subject (relative)
-//    saturation (%)<---> quality (relative)
-//    lightness (%) <---> understanding (relative)
+//    saturation (%)<---> specificity (relative)
+//    lightness (%) <---> transfer speed (relative)
 //    alpha (%)     <---> clarity of message (relative)
 
 // TODO: find how to duplicate class declarations for h, s, l, a params
