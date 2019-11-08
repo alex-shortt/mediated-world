@@ -1,4 +1,4 @@
-import Box from "world/Box"
+import Box from "./world/Box"
 
 function sketch(p) {
   const being = new Box()
