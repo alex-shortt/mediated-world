@@ -2,12 +2,14 @@ import children from "sketches/children"
 import community from "sketches/community"
 import plugged from "sketches/plugged"
 import ergodic from "sketches/ergodic"
+import source from "sketches/source"
 
 const pieces = {
   children,
   community,
   plugged,
-  ergodic
+  ergodic,
+  source
 }
 
 export function getPieceByIndex(i) {
