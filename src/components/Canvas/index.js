@@ -9,6 +9,14 @@ const Container = styled.div`
   background: white;
   box-sizing: border-box;
   z-index: 1;
+  user-select: none;
+
+  //  position: absolute;
+  //top: 0;
+  //left: 0;
+  //width: 100% !important;
+  //height: 100% !important;
+  //z-index: 5;
 
   @media screen and (max-width: 850px) {
     position: absolute;

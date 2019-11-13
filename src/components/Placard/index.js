@@ -1,17 +1,17 @@
 import React from "react"
 import styled from "styled-components/macro"
 
-const loremIpsum =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+import Menu from "./components/Menu"
 
 const Container = styled.div`
   flex: 1;
   height: 100%;
   box-sizing: border-box;
-  padding: 0 25px;
+  margin: 0 25px;
+  padding: 0;
+  border: 4px solid black;
 
   @media screen and (max-width: 850px) {
-    padding: 0 4vw;
     position: absolute;
     background: white;
     width: 60vw;
@@ -24,26 +24,9 @@ const Container = styled.div`
   }
 `
 
-const Title = styled.h1`
-  font-family: Impact, sans-serif;
-
-  @media screen and (max-width: 850px) {
-    font-size: 1.3em;
-  }
-`
-
-const Subtitle = styled.p`
-  font-family: Impact, sans-serif;
-  color: #898989;
-  font-size: 0.9em;
-
-  @media screen and (max-width: 850px) {
-    font-size: 1.1em;
-  }
-`
-
 const Text = styled.p`
   font-family: "Times New Roman", serif;
+  padding: 0 10px;
 
   @media screen and (max-width: 850px) {
     font-size: 0.9em;
@@ -53,12 +36,11 @@ const Text = styled.p`
 export default function Placard(props) {
   const { piece, ...restProps } = props
 
-  const { title = "Untitled", description = "", date } = piece
+  const { description = "" } = piece
 
   return (
     <Container {...restProps}>
-      <Title>{title}</Title>
-      <Subtitle>{date}</Subtitle>
+      <Menu {...props} />
       <Text>{description}</Text>
     </Container>
   )

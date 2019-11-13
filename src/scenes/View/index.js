@@ -1,11 +1,21 @@
-import React, { useRef, useState, useCallback } from "react"
-import styled from "styled-components"
+import React, { useRef } from "react"
+import styled, { keyframes } from "styled-components"
 
-import pieces from "services/pieces"
+import { getPieceByIndex, getPieceIndexByTitle } from "services/pieces"
+import { calcChildrenZIndex } from "services/zIndex"
 import Helmet from "components/Helmet"
 import Canvas from "components/Canvas"
 import Placard from "components/Placard"
 import Navigation from "components/Navigation"
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
 
 const Container = styled.div`
   width: 100%;
@@ -18,6 +28,10 @@ const Container = styled.div`
   justify-content: center;
   padding: 5vh 5vw;
   box-sizing: border-box;
+  opacity: 0;
+
+  animation: ease-in ${fadeIn} forwards 2s;
+  animation-delay: 0.5s;
 `
 
 const ContentRow = styled.div`
@@ -49,44 +63,27 @@ const NavigationRow = styled.div`
 `
 
 export default function View(props) {
+  const {
+    match: {
+      params: { pieceId }
+    }
+  } = props
+
+  // TODO: if not first or second option, redirect or 404!
+  const index = parseInt(pieceId, 10) - 1 || getPieceIndexByTitle(pieceId) || 0
+
   const contentRowRef = useRef()
-
-  const [index, setIndex] = useState(0)
-  const [focusTop, setFocusTop] = useState("true")
-
-  const changeIndex = useCallback(
-    diff => {
-      let newPiece = index + diff
-
-      if (newPiece > pieces.length - 1) {
-        newPiece = 0
-      }
-      if (newPiece < 0) {
-        newPiece = pieces.length - 1
-      }
-
-      setIndex(newPiece)
-    },
-    [index]
-  )
+  const onClick = e => calcChildrenZIndex(contentRowRef, e.target)
 
   return (
     <Container>
       <Helmet title="Mediated World" />
-      <ContentRow ref={contentRowRef}>
-        <Canvas
-          parentRef={contentRowRef}
-          onClick={() => setFocusTop("false")}
-          piece={pieces[index]}
-        />
-        <Placard
-          onClick={() => setFocusTop("true")}
-          style={{ zIndex: focusTop === "true" ? 2 : 0 }}
-          piece={pieces[index]}
-        />
+      <ContentRow ref={contentRowRef} onClick={onClick}>
+        <Canvas parentRef={contentRowRef} piece={getPieceByIndex(index)} />
+        <Placard piece={getPieceByIndex(index)} />
       </ContentRow>
       <NavigationRow>
-        <Navigation pos={index} changePos={changeIndex} range={pieces.length} />
+        <Navigation pos={index} />
       </NavigationRow>
     </Container>
   )
