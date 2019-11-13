@@ -9,17 +9,17 @@ function sketch(p) {
   const human2 = new Box({ pos: [0, 0, 275] })
   const control1 = new Box({
     pos: [-275, 0, 0],
-    fill: new Color({ lightness: 1, saturation: 0 })
+    fill: new Color({ b: 1, s: 0 })
   })
   const control2 = new Box({
     pos: [275, 0, 0],
-    fill: new Color({ lightness: 0, saturation: 0 })
+    fill: new Color({ b: 0, s: 0 })
   })
   const prophet = new Box({
     light: new Color({
-      hue: Math.floor(Math.random() * 365),
-      saturation: 0.9,
-      lightness: 0.3
+      h: Math.floor(Math.random() * 365),
+      s: 0.9,
+      b: 0.3
     })
   })
 
@@ -69,7 +69,7 @@ function renderWorld(p, world) {
 function renderBeing(p, box) {
   const { pos, rot, fill, size, light } = box.getBox()
   if (light) {
-    const lightHSLA = light.getColor()
+    const lightHSLA = light.getColorHSLA()
     p.pointLight(p.color(lightHSLA), 0, 0, 0)
   }
   p.push()
@@ -81,8 +81,8 @@ function renderBeing(p, box) {
   // p.specularMaterial(255, 255, 255)
   p.ambientMaterial(0)
 
-  const fillHSLA = fill.getColor()
-  p.fill(p.color(light ? light.getColor() : fillHSLA))
+  const fillHSLA = fill.getColorHSLA()
+  p.fill(p.color(light ? light.getColorHSLA() : fillHSLA))
   p.stroke(0)
   p.strokeWeight(4)
 
@@ -92,7 +92,8 @@ function renderBeing(p, box) {
 }
 
 const title = "Source of Information"
-const date = "11-8-19"
-const description = "this is source"
+const date = "11-12-19"
+const description =
+  "Represented here is a source of information outputting what it knows (its fill) to nearby beings. This is a work in progress..."
 
 export default { type: "p5", title, description, date, sketch }
