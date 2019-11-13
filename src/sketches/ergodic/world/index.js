@@ -5,5 +5,6 @@
 //     amplitudes
 //     and count)
 
-export { default as Box } from "world/Box"
-export { default as Color } from "world/Color"
+export { default as Box } from "./Box"
+export { default as Color } from "./Color"
+export { default as Stroke } from "./Stroke"

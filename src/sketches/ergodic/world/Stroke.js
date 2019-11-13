@@ -1,9 +1,8 @@
-// Stroke :: Input & Output (I/O)
-//    weight (%)     <---> % of own information (% of GB)
-//    color (color) <---> information outputted or absence of information
-//                        inputted (^Color)
+// Stroke :: Output
+//    weight (%)    <---> speed of output as % of own information (% of GB / s)
+//    color (^Color)<---> information outputted (^Color)
 
-import Color from "world/Color"
+import Color from "./Color"
 
 export default class Stroke {
   constructor(props) {

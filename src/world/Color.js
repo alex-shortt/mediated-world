@@ -1,7 +1,7 @@
 // Color :: Information
-//    hue (0-255)   <---> subject (relative)
-//    saturation (%)<---> quality (relative)
-//    lightness (%) <---> understanding (relative)
+//    hue (0-360)   <---> subject (relative)
+//    saturation (%)<---> specificity (relative)
+//    brightness (%) <---> transfer speed as % of own knowledge (relative)
 //    alpha (%)     <---> clarity of message (relative)
 
 // TODO: find how to duplicate class declarations for h, s, l, a params
@@ -9,10 +9,10 @@
 export default class Color {
   constructor(props) {
     const defaultProps = {
-      hue: Math.random() * 255,
-      saturation: Math.random(),
-      lightness: Math.random(),
-      alpha: Math.random()
+      h: Math.random() * 360,
+      s: Math.random(),
+      b: Math.random(),
+      a: Math.random()
     }
     this.props = { ...defaultProps, ...props }
     this.wrapValues()
@@ -30,44 +30,57 @@ export default class Color {
   }
 
   normalizeValues() {
-    const { hue, saturation, lightness, alpha } = this.props
+    const { h, s, b, a } = this.props
     const newColor = {
-      hue: normalized(hue, 0, 255),
-      saturation: normalized(saturation, 0, 100),
-      lightness: normalized(lightness, 0, 100),
-      alpha: normalized(alpha, 0, 100)
+      h: normalized(h, 0, 360),
+      s: normalized(s, 0, 100),
+      b: normalized(b, 0, 100),
+      a: normalized(a, 0, 100)
     }
     this.setColor(newColor, true)
   }
 
   wrapValues() {
-    const { hue, saturation, lightness, alpha } = this.props
+    const { h, s, b, a } = this.props
     const newColor = {
-      hue: wrapped(hue, 0, 255),
-      saturation: wrapped(saturation, 0, 100),
-      lightness: wrapped(lightness, 0, 100),
-      alpha: wrapped(alpha, 0, 100)
+      h: wrapped(h, 0, 360),
+      s: wrapped(s, 0, 100),
+      b: wrapped(b, 0, 100),
+      a: wrapped(a, 0, 100)
     }
     this.setColor(newColor)
   }
 
-  getColor() {
-    const { hue, saturation, lightness, alpha } = this.props
-    const h = parseInt(hue, 10)
-    const s = Math.floor(saturation * 100)
-    const l = Math.floor(lightness * 100)
-    const a = alpha.toFixed(2)
-
-    return `hsla(${h}, ${s}%, ${l}%, ${a})`
+  getColorHSLA() {
+    const { h, s, l, a } = sb2sl(this.props)
+    const newH = parseInt(h, 10)
+    const newS = Math.floor(s * 100)
+    const newL = Math.floor(l * 100)
+    const newA = a.toFixed(2)
+    return `hsla(${newH}, ${newS}%, ${newL}%, 1)`
   }
+
+  getColor() {
+    return this.props
+  }
+}
+
+function sb2sl(SB) {
+  const SL = { h: SB.h, a: SB.a }
+  SL.l = ((2 - SB.s) * SB.b) / 2
+  SL.s =
+    SL.l && SL.l < 1
+      ? (SB.s * SB.b) / (SL.l < 0.5 ? SL.l * 2 : 2 - SL.l * 2)
+      : SL.s
+  return SL
 }
 
 function wrapped(val, min, max) {
   let newVal = val
-  while (val > max) {
+  while (newVal > max) {
     newVal -= max - min
   }
-  while (val < min) {
+  while (newVal < min) {
     newVal += max - min
   }
   return newVal
