@@ -20,7 +20,7 @@ export default class Box {
   }
 
   setBox(newBox) {
-    this.props = { ...this.props, newBox }
+    this.props = { ...this.props, ...newBox }
   }
 
   getBox() {
