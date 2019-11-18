@@ -1,6 +1,6 @@
-import Box from "world/Box"
-import World from "world/World"
-import Color from "world/Color"
+import Box from "./world/Box"
+import World from "./world/World"
+import Color from "./world/Color"
 
 function sketch(p) {
   const world = new World()
@@ -9,7 +9,7 @@ function sketch(p) {
   const human2 = new Box({ pos: [0, 0, 275] })
   const control1 = new Box({
     pos: [-275, 0, 0],
-    fill: new Color({ b: 1, s: 0 })
+    fill: new Color({ b: 100, s: 0 })
   })
   const control2 = new Box({
     pos: [275, 0, 0],
@@ -17,15 +17,16 @@ function sketch(p) {
   })
   const prophet = new Box({
     light: new Color({
-      h: Math.floor(Math.random() * 365),
-      s: 0.9,
-      b: 0.3
+      h: Math.floor(Math.random() * 360),
+      s: 90,
+      b: 30
     })
   })
 
   p.setup = () => {
     p.createCanvas(800, 600, p.WEBGL)
     p.setAttributes("perPixelLighting", true)
+    p.colorMode(p.HSB)
     world.addBeing(human1)
     world.addBeing(human2)
     world.addBeing(control1)
@@ -69,8 +70,8 @@ function renderWorld(p, world) {
 function renderBeing(p, box) {
   const { pos, rot, fill, size, light } = box.getBox()
   if (light) {
-    const lightHSLA = light.getColorHSLA()
-    p.pointLight(p.color(lightHSLA), 0, 0, 0)
+    const lightColor = light.getColor()
+    p.pointLight(p.color(lightColor.h, lightColor.s, lightColor.b), 0, 0, 0)
   }
   p.push()
 
@@ -81,8 +82,8 @@ function renderBeing(p, box) {
   // p.specularMaterial(255, 255, 255)
   p.ambientMaterial(0)
 
-  const fillHSLA = fill.getColorHSLA()
-  p.fill(p.color(light ? light.getColorHSLA() : fillHSLA))
+  const fillColor = light ? light.getColor() : fill.getColor()
+  p.fill(p.color(fillColor.h, fillColor.s, fillColor.b))
   p.stroke(0)
   p.strokeWeight(4)
 
