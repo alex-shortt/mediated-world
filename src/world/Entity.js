@@ -15,11 +15,15 @@ export class Entity {
   }
 
   affect(neighbor) {
-    const { pos, rot } = this.props
-    const { nLight, nPos, nRot } = neighbor.getEntity()
+    const { pos, rot, fill } = this.props
+    const { light: nLight, pos: nPos, rot: nRot } = neighbor.getEntity()
     if (nLight) {
+      if (!fill) {
+        this.fill = new Color({ h: 0, s: 0, b: 0 })
+      }
+
       const dist = distSq(pos[0], pos[1], pos[2], nPos[0], nPos[1], nPos[2])
-      console.log(dist)
+      // console.log(dist)
     }
   }
 

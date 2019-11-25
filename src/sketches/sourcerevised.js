@@ -1,21 +1,15 @@
-import Box from "world/Box"
-import World from "world/World"
+import { Environment } from "world/Environment"
+import { Entity } from "world/Entity"
 import Color from "world/Color"
 
 function sketch(p) {
-  const world = new World()
+  const environment = new Environment()
 
-  const human1 = new Box({ pos: [0, 0, -275] })
-  const human2 = new Box({ pos: [0, 0, 275] })
-  const control1 = new Box({
-    pos: [-275, 0, 0],
-    fill: new Color({ b: 100, s: 0 })
-  })
-  const control2 = new Box({
-    pos: [275, 0, 0],
-    fill: new Color({ b: 0, s: 0 })
-  })
-  const prophet = new Box({
+  const human1 = new Entity({ pos: [0, 0, -275] })
+  const human2 = new Entity({ pos: [0, 0, 275] })
+  const control1 = new Entity({ pos: [-275, 0, 0] })
+  const control2 = new Entity({ pos: [275, 0, 0] })
+  const prophet = new Entity({
     light: new Color({
       h: Math.floor(Math.random() * 360),
       s: 90,
@@ -27,11 +21,11 @@ function sketch(p) {
     p.createCanvas(800, 600, p.WEBGL)
     p.setAttributes("perPixelLighting", true)
     p.colorMode(p.HSB)
-    world.addBeing(human1)
-    world.addBeing(human2)
-    world.addBeing(control1)
-    world.addBeing(control2)
-    world.addBeing(prophet)
+    environment.addEntity(human1)
+    environment.addEntity(human2)
+    environment.addEntity(control1)
+    environment.addEntity(control2)
+    environment.addEntity(prophet)
     console.log(prophet)
   }
 
@@ -41,7 +35,7 @@ function sketch(p) {
     p.rotateY(p.frameCount * 0.005)
 
     // render beings in world
-    renderWorld(p, world)
+    environment.update()
   }
 }
 
