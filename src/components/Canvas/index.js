@@ -52,7 +52,7 @@ export default function Canvas(props) {
   if (piece.type === "p5") {
     return (
       <Container style={style} {...restProps}>
-        <P5Wrapper sketch={piece.sketch} />
+        <P5Wrapper sketch={piece.sketch} cover={piece.cover} />
       </Container>
     )
   }
