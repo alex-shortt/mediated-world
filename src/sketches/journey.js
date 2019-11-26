@@ -1,9 +1,11 @@
 function sketch(p) {
+  let camera
+
   const route = []
   const boxSize = 26
 
-  const rResolution = 1.1
-  const rSpeed = 0.016
+  const rResolution = 1.2
+  const rSpeed = 0.01
   const rAmplitude = boxSize * boxSize * 3
 
   let gHue = p.random(0, 360)
@@ -14,6 +16,8 @@ function sketch(p) {
     p.setAttributes("perPixelLighting", true)
     p.colorMode(p.HSB)
 
+    camera = p.createCamera()
+
     // 100 route items
     for (let i = 0; i < 70; i += 1) {
       route.push(new RouteItem(128))
@@ -23,14 +27,23 @@ function sketch(p) {
   p.draw = () => {
     p.background(255)
 
-    // update global hue
     gHue += hueSpeed
     if (gHue > 360) {
       gHue = 0
     }
 
-    // update camera position
-    p.translate(0, route[1].getY(), 0)
+    // look 15 routeitems ahead
+    p.camera(
+      0,
+      -route[1].getY(),
+      400 + boxSize,
+      0,
+      -route[16].getY(),
+      -16 * boxSize + 400 + boxSize,
+      0,
+      1,
+      0
+    )
 
     // render
     for (let i = 0; i < route.length; i += 1) {
@@ -70,8 +83,8 @@ function sketch(p) {
         const ez = p.sin(p.frameCount * 0.01 + i * 0.1) * boxSize * 0.7
         p.push()
         p.fill(
-          gHue + i * hueSpeed,
-          p.map(p.noise(p.frameCount * 0.05 + i, angle), 0, 1, 30, 100),
+          p.noise((p.frameCount * 0.05 + i + angle) * 0.4) * 360,
+          p.map(p.noise(p.frameCount * 0.05 + i, angle), 0, 1, 64, 100),
           p.map(p.noise(angle, p.frameCount * 0.05 + i), 0, 1, 30, 100)
         )
         p.translate(this.cx + ex, this.cy + ey, this.cz + ez)
@@ -85,7 +98,12 @@ function sketch(p) {
 
 const title = "Journey of a Lifetime"
 const date = "11-25-19"
-const description = "The journey one takes throughout life "
+const description = `A general representation of an entire life's experience. 
+  Time is represented as movement on the z axis, and progress in one's measure
+  of success on the y axis (not absolute). Perlin noise is used to model y axis
+  position, hue, saturation, and brightness, and it does a good job and roughly
+  modelling a possible community. It's up to the spectator to input all the
+  information and process it properly...`
 
 export default {
   type: "p5",
