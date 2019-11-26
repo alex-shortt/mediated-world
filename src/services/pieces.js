@@ -3,13 +3,15 @@ import community from "sketches/community"
 import plugged from "sketches/plugged"
 import ergodic from "sketches/ergodic"
 import source from "sketches/source"
+import journey from "sketches/journey"
 
 const pieces = {
   children,
   community,
   plugged,
   ergodic,
-  source
+  source,
+  journey
 }
 
 export function getPieceByIndex(i) {
@@ -27,6 +29,7 @@ export function getPieceIndexByTitle(title) {
   }
   return null
 }
+
 export function getPieceByTitle(title) {
   return pieces[title] && pieces[title][1]
 }
